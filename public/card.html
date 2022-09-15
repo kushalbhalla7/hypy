@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card</title>
+</head>
+<body>
+    <h1 style="color: #ace2de; ">Enter you card details</h1>
+    <form action="http://localhost:3000/api/confirm" method="get" class="paymentWidgets" data-brands="VISA MASTER AMEX"></form>
+</body>
+
+<script>
+    const id = new URLSearchParams(window.location.search).get('id');
+
+    const s = document.createElement("script");
+    s.type = "text/javascript";
+    s.src = `https://eu-test.oppwa.com/v1/paymentWidgets.js?checkoutId=${id}`;
+    s.innerHTML = null;
+    s.id = "hyScript";
+
+    document.body.appendChild(s);
+</script>
+
+</html>
