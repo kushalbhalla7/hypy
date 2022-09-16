@@ -1,11 +1,12 @@
 const amountEle = document.getElementById('amount');
 const payBtn = document.getElementById('pay');
 
-
-// calling backend api with amount value
+// server to server to pay asyncrouse
 function pay() {
+
     const amount = amountEle.value;
-    return fetch('http://localhost:3000/copy-and-pay/checkout', {
+
+    return fetch('http://localhost:3000/server-to-server/async/checkout', {
         method: 'POST',
         body: JSON.stringify({
             amount
@@ -22,6 +23,6 @@ function pay() {
 payBtn.addEventListener('click', async () => {
     const resData = await pay();
     console.log("payment data", resData);
-    // redirect to front end page for enter card details
-    window.location = `http://localhost:3000/card?id=${resData.id}`; 
+    // redirecting to hyper pay testing verification page
+    window.location = resData.redirect.url;
 });

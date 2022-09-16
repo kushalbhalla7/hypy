@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <script src="./js/verify.js" defer></script> -->
+</head>
+<body>
+    <h1>Payment has been verified sucessfully has been redirected congrates</h1>
+    <button id="res">Show response (in console)</button>
+    <script>
+
+        const resourcePath = new URLSearchParams(window.location.search).get('resourcePath');
+
+        const resBtn = document.getElementById('res');
+
+        function pay() {
+            return fetch('http://localhost:3000/server-to-server/async/confirm', {
+                method: 'post',
+                body: JSON.stringify({
+                    resourcePath
+                }),
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                }
+            })
+            .then(res => res.text())
+            .then(JSON.parse)
+            .catch(err => console.log(err));
+        }
+
+        resBtn.addEventListener('click', async() => {
+            const resData = await pay();
+            console.log("response data", resData);
+
+        })
+
+    </script>
+</body>
+</html>

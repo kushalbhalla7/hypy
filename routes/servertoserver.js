@@ -6,7 +6,7 @@ const router = require('express').Router();
 
 // syncronous workflow checkout for server to server
 router.post(
-    '/checkout',
+    '/sync/checkout',
     async (req, res) => {
         const amount = req.body.amount;
 
@@ -56,7 +56,7 @@ router.post(
             postRequest.end();
         });
 
-        const file = pathModule.resolve(__dirname, `../public/text/checkout.json`);
+        const file = pathModule.resolve(__dirname, `../public/data/checkout.json`);
 
 
         fs.writeFile(file, JSON.stringify(sendData), (error) => {
@@ -70,7 +70,7 @@ router.post(
 
 // asyncronous workflow checkout for server to server
 router.post(
-    '/checkout2',
+    '/async/checkout',
     async (req, res) => {
         console.log("Async is called");
         const amount = req.body.amount;
@@ -85,7 +85,7 @@ router.post(
 		    'bankAccount.bic':'TESTDETT421',
 		    'bankAccount.iban':'DE14940593100000012346',
 		    'bankAccount.country':'DE',
-		    'shopperResultUrl':'http://localhost:3000/shopper'
+		    'shopperResultUrl':'http://localhost:3000/3/verify'
         });
         const options = {
             port: 443,
@@ -120,7 +120,7 @@ router.post(
             postRequest.end();
         });
 
-        const file = pathModule.resolve(__dirname, `../public/text/checkout.json`);
+        const file = pathModule.resolve(__dirname, `../public/data/checkout.json`);
 
 
         fs.writeFile(file, JSON.stringify(sendData), (error) => {
@@ -133,8 +133,9 @@ router.post(
 
 
 router.post(
-    '/confirm',
+    '/async/confirm',
     async (req, res) => {
+
         let path=req.body.resourcePath;
         path += '?entityId=8a8294174b7ecb28014b9699220015ca';
         const options = {
@@ -146,7 +147,7 @@ router.post(
                 'Authorization':'Bearer OGE4Mjk0MTc0YjdlY2IyODAxNGI5Njk5MjIwMDE1Y2N8c3k2S0pzVDg='
             }
         };
-        console.log(path);
+
         const sendData = await new Promise((resolve, reject) => {
             const postRequest = https.request(options, function(res) {
                 const buf = [];
@@ -166,8 +167,7 @@ router.post(
             postRequest.end();
         });
 
-
-        const file = pathModule.resolve(__dirname, `../public/text/response.json`);
+        const file = pathModule.resolve(__dirname, `../public/data/response.json`);
         fs.writeFile(file, JSON.stringify(sendData), (error) => {
             console.log(error);
         });

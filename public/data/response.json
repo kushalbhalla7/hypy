@@ -1,0 +1,26 @@
+{
+    "id": "8ac7a49f8345ce750183468a2a5a4196",
+    "paymentType": "DB",
+    "paymentBrand": "GIROPAY",
+    "amount": "100.00",
+    "currency": "EUR",
+    "descriptor": "9815.7912.5305 Giropay_Channel",
+    "result": {
+        "code": "800.100.100",
+        "description": "transaction declined for unknown reason"
+    },
+    "resultDetails": {
+        "ConnectorTxID1": "0091229264",
+        "clearingInstituteName": "Giropay Fiducia"
+    },
+    "bankAccount": {
+        "number": "DE14940593100000012346",
+        "iban": "DE14940593100000012346",
+        "bankCode": "TESTDETT421",
+        "bic": "TESTDETT421",
+        "country": "DE"
+    },
+    "buildNumber": "adc7ce5adf975637847e3ecbbb82c377db751bd5@2022-09-15 12:22:53 +0000",
+    "timestamp": "2022-09-16 13:43:34.797+0000",
+    "ndc": "8a8294174b7ecb28014b9699220015ca_4ff355717a0041669c98b64531b13036"
+}

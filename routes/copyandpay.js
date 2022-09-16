@@ -8,7 +8,6 @@ router.post(
     '/checkout',
     async (req, res) => {
         const amount = req.body.amount;
-
         const path = '/v1/checkouts';
         const data = querystring.stringify({
             'entityId':'8a8294174b7ecb28014b9699220015ca',
@@ -28,10 +27,8 @@ router.post(
             }    
         };
 
-
         const sendData = await new Promise((resolve, reject) => {
             const postRequest = https.request(options, function(res) {
-                console.log("Res ===>", res);
                 const buf = [];
                 res.on('data', chunk => {
                     buf.push(Buffer.from(chunk));
@@ -45,16 +42,13 @@ router.post(
                     }
                 });
             });
-            postRequest.on('error', console.log);
+            postRequest.on('error', reject);
             postRequest.write(data);
             postRequest.end();
         });
 
-        console.log("send Data", sendData);
-
-        const file = pathModule.resolve(__dirname, `../public/text/checkout.json`);
-
-
+        // writing payment data into checkout json file
+        const file = pathModule.resolve(__dirname, `../public/data/checkout.json`);
         fs.writeFile(file, JSON.stringify(sendData), (error) => {
             console.log(error);
         });
@@ -77,6 +71,7 @@ router.get(
                 'Authorization':'Bearer OGE4Mjk0MTc0YjdlY2IyODAxNGI5Njk5MjIwMDE1Y2N8c3k2S0pzVDg='
             }
         };
+
         const sendData = await new Promise((resolve, reject) => {
             const postRequest = https.request(options, function(res) {
                 const buf = [];
@@ -96,8 +91,8 @@ router.get(
             postRequest.end();
         });
 
-
-        const file = pathModule.resolve(__dirname, `../public/text/response.json`);
+        // writing payment's status response in response json file
+        const file = pathModule.resolve(__dirname, `../public/data/response.json`);
         fs.writeFile(file, JSON.stringify(sendData), (error) => {
             console.log(error);
         });

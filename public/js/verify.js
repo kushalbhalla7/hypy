@@ -4,7 +4,7 @@ const resourcePath = new URLSearchParams(window.location.search).get('resourcePa
 const resBtn = document.getElementById('res');
 
 function pay() {
-    return fetch('http://localhost:3000/api2/confirm', {
+    return fetch('http://localhost:3000/server-to-sevrer/async/confirm', {
         method: 'post',
         body: JSON.stringify({
             resourcePath
@@ -19,9 +19,6 @@ function pay() {
 }
 
 resBtn.addEventListener('click', async() => {
-    console.log("called")
-    const data = await pay();
-    console.log("called2")
-
-    console.log(data);
+    const resData = await pay();
+    console.log("response data", resData);
 })
